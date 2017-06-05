@@ -70,7 +70,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
 
-    QPixmap image_init;
+    
+       QPixmap image_init;
     image_init.load("/work/init.png");
      ui->label_show->setPixmap(image_init);
 

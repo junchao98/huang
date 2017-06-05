@@ -9,7 +9,7 @@ extern "C" {
 
 }
 
-
+#include <QDateTime>
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +28,8 @@ private slots:
     void on_pushButton_clicked();
      void show_img();
      void flushBuff();
+     void on_pushButton_save_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -37,7 +39,11 @@ private:
     int process_image(void *addr,int length) ;
 
     unsigned char *bufrgb;
+    bool save_flag;
+     FILE *fp ;
+    QImage image_my;
 
+    QDateTime date;
     QTimer *timer;
 
 };

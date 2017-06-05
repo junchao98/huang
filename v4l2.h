@@ -2,8 +2,7 @@
 #define     __V4L2_H__  
 #include <linux/types.h>  
 #include <linux/videodev2.h>  
-#include "jpeglib.h"
-#include "jpegint.h"
+
   
 #ifdef __cplusplus  
 extern "C" {  

@@ -1,3 +1,7 @@
+
+
+
+
 #-------------------------------------------------
 #
 # Project created by QtCreator 2017-05-09T20:44:18
@@ -8,7 +12,10 @@ QT       += core gui
 #QT      += multimedia
 
 QTPLUGIN       += qjpeg
+QT      +=
 
+QMAKE_CFLAGS    += -march=armv4t
+QMAKE_CXXFLAGS  += -march=armv4t
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
