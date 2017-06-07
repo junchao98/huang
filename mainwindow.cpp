@@ -70,9 +70,13 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
     ui->setupUi(this);
 
-    QPixmap image_init;
+
+       QPixmap image_init;
     image_init.load("/work/init.png");
      ui->label_show->setPixmap(image_init);
+        cmd_pro = new QProcess;
+     //system("/work/clean.sh");
+       // cmd_pro->start("/work/clean.sh");
 
 
 }
@@ -108,6 +112,11 @@ void MainWindow::on_pushButton_clicked()
         connect(timer,SIGNAL(timeout()),this,SLOT(flushBuff()));
         timer ->start(66);
 
+
+        timer_up = new QTimer(this);
+        connect(timer_up,SIGNAL(timeout()),this,SLOT(up_image()));
+        timer_up ->start(1000*60*10);  //10min
+
         save_flag = 0;
         fp = NULL;
 
@@ -139,8 +148,12 @@ void MainWindow::flushBuff()
         QString str = date.toString("dd_MM_yyyy_h_m_s");
 
         str+=".jpg";
+
         QByteArray ba = str.toLatin1();
         char * jname=NULL;
+        char * ch_cmd = NULL;
+        QString str_cmd;
+
         jname = ba.data();
         fp = fopen(jname,"w");
         fwrite((unsigned char *)pd.buffers[pd.buf.index].start,1,pd.buffers[pd.buf.index].length,fp);
@@ -149,9 +162,17 @@ void MainWindow::flushBuff()
 
         fclose(fp);
 
+
+        str_cmd = "tftp -l " +str +" -p 10.19.3.0";
+        ba = str_cmd.toLatin1();
+        ch_cmd = ba.data();
+        cmd_pro->start(ch_cmd);
+
+
+
         str.insert(0,"save as ");
 
-         QMessageBox::information(this,tr("Tip"),str);
+         //QMessageBox::information(this,tr("Tip"),str);
    }
 
 
@@ -167,6 +188,14 @@ void MainWindow::show_img()
 
 
 }
+
+ void MainWindow::up_image(void)
+ {
+
+   save_flag = 1;
+
+
+ }
 
 
 

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QProcess>
 
 extern "C" {
 
@@ -29,6 +30,7 @@ private slots:
      void show_img();
      void flushBuff();
      void on_pushButton_save_clicked();
+     void up_image(void);
 
 private:
     Ui::MainWindow *ui;
@@ -45,6 +47,9 @@ private:
 
     QDateTime date;
     QTimer *timer;
+    QTimer *timer_up;
+    QProcess *cmd_pro;
+
 
 };
 
